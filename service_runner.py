@@ -1,7 +1,7 @@
 import os
 import sys
 
-from TrackpointHandler import TrackpointConfig
+from Handlers import TrackpointConfig
 import configparser
 
 config = configparser.ConfigParser()
