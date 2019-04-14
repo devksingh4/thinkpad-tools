@@ -1,0 +1,11 @@
+[Unit]
+Description=Thinkpad Tools
+After=multi-user.target
+
+[Service]
+Type=idle
+ExecStart=/usr/bin/python /usr/lib/ThinkpadTools/service_runner.py
+ExecReload=/usr/bin/python /usr/lib/ThinkpadTools/service_runner.py
+
+[Install]
+WantedBy=multi-user.target
