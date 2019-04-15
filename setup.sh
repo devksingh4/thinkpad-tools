@@ -19,7 +19,7 @@ cp config.ini /etc/thinkpad_tools
 echo "Configuration located at /etc/thinkpad_tools/config.ini"
 echo ""
 echo "Copying handlers and libraries..."
-cp TrackpointHandler.py /usr/lib/ThinkpadTools/
+cp Handlers.py /usr/lib/ThinkpadTools/
 echo "Finished copying handlers and libraries"
 echo ""
 echo "Copying startup unit files..."
