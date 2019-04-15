@@ -14,7 +14,7 @@ fi
 
 
 echo "Copying stock configuration file..." 
-cp config.ini /etc/thinkpad_tools
+# cp config.ini /etc/thinkpad_tools
 
 echo "Configuration located at /etc/thinkpad_tools/config.ini"
 echo ""
@@ -25,6 +25,9 @@ echo ""
 echo "Copying startup unit files..."
 cp ThinkpadTools.service /lib/systemd/system/
 cp service_runner.py /usr/lib/ThinkpadTools/
+echo "Copying binaries..."
+cp thinkpad-tools.py /usr/bin/
+chmod +x /usr/bin/thinkpad-tools.py
 echo "Configuring Service..."
 systemctl daemon-reload
 systemctl enable ThinkpadTools.service

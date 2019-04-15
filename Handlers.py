@@ -10,7 +10,7 @@ class Trackpoint(object):
         tp_sens_file.close()
         tp_speed_file.close()
 class Battery(object):
-    def __init__(self, bat1startthresh, bat2startthresh, bat1stopthresh, bat2stopthresh):
+    def __init__(self, bat1startthresh = None, bat2startthresh = None, bat1stopthresh = None, bat2stopthresh = None):
         self.bat1_start_thresh = bat1startthresh
         self.bat2_start_thresh = bat2startthresh
         self.bat1_stop_thresh = bat1stopthresh
