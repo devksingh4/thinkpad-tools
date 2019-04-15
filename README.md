@@ -3,11 +3,12 @@ Tools created to manage thinkpad properties
 
 ## Currently Supported Properties
 * Adjusting Trackpoint Speed and Sensitivity
-
-## Planned Supported Properties
 * Managing battery/batteries
   * Setting Charge Stop and Start thresholds
-  * Checking battery health
+  * Checking battery health (cli tool not working but working in scripts)
+
+## Planned Supported Properties
+
 * Undervolting CPU
 * Replicate other features present in Lenovo Vantage!
 
