@@ -19,8 +19,9 @@ echo "Copying stock configuration file..."
 echo "Configuration located at /etc/thinkpad_tools/config.ini"
 echo ""
 echo "Copying handlers and libraries..."
-mkdir /usr/lib/ThinkpadTools/
+#mkdir /usr/lib/ThinkpadTools/
 cp Handlers.py /usr/lib/ThinkpadTools/
+cp Handlers.py /usr/lib/
 echo "Finished copying handlers and libraries"
 echo ""
 echo "Copying startup unit files..."
