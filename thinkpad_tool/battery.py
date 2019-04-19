@@ -46,25 +46,25 @@ EDITABLE_PROPERTIES: list = [
 
 STATUS_STR_TEMPLATE: str = '''\
 Status of battery "{name}":
-  Alarm                  :  {alarm} Wh
-  Capacity level         :  {capacity_level}
-  Charge start threshold :  {charge_start_threshold}%
-  Charge stop threshold  :  {charge_stop_threshold}%
-  Cycle count            :  {cycle_count}
-  Current capacity       :  {energy_full} Wh
-  Design capacity        :  {energy_full_design} Wh
-  Battery health         :  {battery_health}%
-  Current energy         :  {energy_now} Wh
-  Manufacturer           :  {manufacturer}
-  Model name             :  {model_name}
-  In use                 :  {power_now}
-  Present                :  {present}
-  Serial number          :  {serial_number}
-  Status                 :  {status}
-  Technology             :  {technology}
-  Type                   :  {type}
-  Minimum design voltage :  {voltage_min_design}
-  Current voltage        :  {voltage_now}\
+  Alarm:                    {alarm} Wh
+  Capacity level:           {capacity_level}
+  Charge start threshold:   {charge_start_threshold}%
+  Charge stop threshold:    {charge_stop_threshold}%
+  Cycle count:              {cycle_count}
+  Current capacity:         {energy_full} Wh
+  Design capacity:          {energy_full_design} Wh
+  Battery health:           {battery_health}%
+  Current energy:           {energy_now} Wh
+  Manufacturer:             {manufacturer}
+  Model name:               {model_name}
+  In use:                   {power_now}
+  Present:                  {present}
+  Serial number:            {serial_number}
+  Status:                   {status}
+  Technology:               {technology}
+  Type:                     {type}
+  Minimum design voltage:   {voltage_min_design}
+  Current voltage:          {voltage_now}\
 '''
 
 USAGE_HEAD: str = '''\

@@ -33,6 +33,8 @@ Examples:
 
 thinkpad-tool trackpoint status
 thinkpad-tool trackpoint set-sensitivity 20
+thinkpad-tool battery list
+thinkpad-tool battery status all
 '''
 
 
