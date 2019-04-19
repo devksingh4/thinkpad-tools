@@ -43,7 +43,7 @@ def commandline_parser(unparsed_args: None or list = None):
     :return: Nothing
     """
     parser = argparse.ArgumentParser(
-        prog='thinkpad-tool',
+        prog='thinkpad_tool',
         description='Tool for ThinkPads',
         usage=USAGE_HEAD,
         epilog=USAGE_EXAMPLES,
