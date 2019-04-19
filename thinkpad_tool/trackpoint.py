@@ -16,8 +16,8 @@ BASE_PATH = pathlib.PurePath('/sys/devices/platform/i8042/serio1/serio2')
 
 STATUS_TEXT = '''\
 Current status:
-  Sensitivity            : {sensitivity}
-  Speed                  : {speed}\
+  Sensitivity:             {sensitivity}
+  Speed:                   {speed}\
 '''
 
 USAGE_HEAD: str = '''\
