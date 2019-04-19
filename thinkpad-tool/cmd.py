@@ -4,6 +4,7 @@ import logging
 import pathlib
 import argparse
 
+from .battery import BatteryHandler
 from .trackpoint import TrackPointHandler
 
 # Setup logger
@@ -42,4 +43,7 @@ def commandline_parser(unparsed_args: None or list = None):
     prop = str(ap.parse_args(unparsed_args[0:1]).property).lower()
     if prop == 'trackpoint':
         parser = TrackPointHandler()
+        parser.run(unparsed_args[1:])
+    if prop == 'battery':
+        parser = BatteryHandler()
         parser.run(unparsed_args[1:])
