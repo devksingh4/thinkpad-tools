@@ -126,7 +126,7 @@ class Battery(object):
                     self.__dict__[prop] = bool(content)
                 else:
                     self.__dict__[prop] = int(content)
-            self.battery_health: int = int(self.energy_full / self.energy_full_design * 100)
+        self.battery_health: int = int(self.energy_full / self.energy_full_design * 100)
 
     def set_values(self):
         """
@@ -272,6 +272,7 @@ class BatteryHandler(object):
         # Commands
         if verb == 'list':
             print(' '.join(self.inner.keys()))
+            return
 
         if verb == 'status':
             result: list = list()
