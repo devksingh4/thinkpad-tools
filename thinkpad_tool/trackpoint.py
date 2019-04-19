@@ -153,7 +153,7 @@ class TrackPointHandler(object):
                 return
             if prop not in self.inner.__dict__.keys():
                 invalid_property(prop, 1)
-            self.inner.__dict__[prop] = int(''.join(args.arguments))
+            self.inner.__dict__[prop] = str(''.join(args.arguments))
             self.inner.set_values()
             print(self.inner.get_status_str())
             return
