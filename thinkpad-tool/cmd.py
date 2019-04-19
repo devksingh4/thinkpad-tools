@@ -1,5 +1,10 @@
 # cmd.py
 
+"""
+Commandline parser
+"""
+
+
 import logging
 import pathlib
 import argparse
@@ -32,18 +37,23 @@ thinkpad-tool trackpoint set-sensitivity 20
 
 
 def commandline_parser(unparsed_args: None or list = None):
-    ap = argparse.ArgumentParser(
+    """
+    Parse the first argument and call the right handler
+    :param unparsed_args: Unparsed arguments
+    :return: Nothing
+    """
+    parser = argparse.ArgumentParser(
         prog='thinkpad-tool',
         description='Tool for ThinkPads',
         usage=USAGE_HEAD,
         epilog=USAGE_EXAMPLES,
         formatter_class=argparse.RawDescriptionHelpFormatter
     )
-    ap.add_argument('property', type=str, help='Property going to take action')
-    prop = str(ap.parse_args(unparsed_args[0:1]).property).lower()
+    parser.add_argument('property', type=str, help='Property going to take action')
+    prop = str(parser.parse_args(unparsed_args[0:1]).property).lower()
     if prop == 'trackpoint':
-        parser = TrackPointHandler()
-        parser.run(unparsed_args[1:])
+        handler = TrackPointHandler()
+        handler.run(unparsed_args[1:])
     if prop == 'battery':
-        parser = BatteryHandler()
-        parser.run(unparsed_args[1:])
+        handler = BatteryHandler()
+        handler.run(unparsed_args[1:])
