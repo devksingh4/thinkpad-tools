@@ -4,7 +4,7 @@ summary: ThinkpadTool
 description: >
   Thinkpad Tool is designed to allow you to manipulate common thinkpad properties for parts such as the trackpoint and battery. 
 confinement: classic
-
+base: core18
 parts:
   thinkpad-tool:
     plugin: python
