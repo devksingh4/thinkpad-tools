@@ -9,6 +9,12 @@ import os
 import sys
 import pathlib
 import argparse
+if os.geteuid() != 0:
+    # os.execvp() replaces the running process, rather than launching a child
+    # process, so there's no need to exit afterwards. The extra "sudo" in the
+    # second parameter is required because Python doesn't automatically set $0
+    # in the new process.
+    os.execvp("sudo", ["sudo"] + sys.argv)
 
 from .utils import ApplyValueFailedException
 
