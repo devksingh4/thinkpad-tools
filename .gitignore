@@ -28,6 +28,8 @@ MANIFEST
 # Don't upload snap files
 *.snap
 snap/.snapcraft
+prime/
+stage/
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
