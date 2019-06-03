@@ -7,8 +7,6 @@ ThinkPad-tool commandline wrapper
 import os
 import sys
 
-dir_path = os.path.dirname(os.path.realpath(__file__))
-print(dir_path)
 
 if os.geteuid() != 0:
     # os.execvp() replaces the running process, rather than launching a child
