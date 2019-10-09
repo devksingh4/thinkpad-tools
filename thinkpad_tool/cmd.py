@@ -11,6 +11,7 @@ import argparse
 
 from .battery import BatteryHandler
 from .trackpoint import TrackPointHandler
+from .undervolt import UndervoltHandler
 
 # Setup logger
 logging.basicConfig(level=logging.INFO)
@@ -25,6 +26,7 @@ thinkpad-tool <property> <action> [<args>]
 Supported properties are:
     trackpoint      Things related to TrackPoints
     battery         Things related to batteries
+    undervolt       Things related to undervolting
     
 '''
 
@@ -58,4 +60,7 @@ def commandline_parser(unparsed_args: None or list = None):
         handler.run(unparsed_args[1:])
     if prop == 'battery':
         handler = BatteryHandler()
+        handler.run(unparsed_args[1:])
+    if prop == 'undervolt':
+        handler = UndervoltHandler()
         handler.run(unparsed_args[1:])
