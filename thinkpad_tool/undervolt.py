@@ -35,7 +35,7 @@ Current status:
 USAGE_HEAD: str = '''\
 thinkpad-tool undervolt <verb> [argument]
 
-Supported verbs are:
+Supported verbs are:prop = 
     status          Print all properties
     set-<property>  Set value
     get-<property>  Get property
@@ -101,7 +101,6 @@ class Undervolt(object):
         Set values to the system MSR using undervolt function
         :return: Nothing
         """
-        undervolt = UndervoltHandler()
         success: bool = True
         failures: list = list()
         for prop in self.__dict__.keys():
@@ -116,7 +115,7 @@ class Undervolt(object):
                 plane = 3
             if prop == "analogio":
                 plane = 4
-            error: int = undervolt(self.__dict__[prop], plane)
+            error: int = self.undervolt(self.__dict__[prop], plane)
             if error != 0:
                 success = False
                 failures.append(str(error))
