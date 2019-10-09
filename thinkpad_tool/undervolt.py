@@ -26,11 +26,11 @@ if os.geteuid() != 0:
 
 STATUS_TEXT = '''\
 Current status:
-  Core:                    {core}\
-  GPU:                     {gpu}\
-  Cache:                   {cache}\
-  Uncore:                  {uncore}\
-  Analogio:                {analogio}\
+  Core:                    {core}\n
+  GPU:                     {gpu}\n
+  Cache:                   {cache}\n
+  Uncore:                  {uncore}\n
+  Analogio:                {analogio}\n
 '''
 USAGE_HEAD: str = '''\
 thinkpad-tool undervolt <verb> [argument]
@@ -129,11 +129,11 @@ class Undervolt(object):
         :return: str: status string
         """
         return STATUS_TEXT.format(
-            core=self.core or 'Unknown\n',
-            gpu=self.gpu or 'Unknown\n',
-            cache=self.cache or 'Unknown\n',
-            uncore=self.uncore or 'Unknown\n',
-            analogio = self.analogio or 'Unknown\n'
+            core=self.core or 'Unknown',
+            gpu=self.gpu or 'Unknown',
+            cache=self.cache or 'Unknown',
+            uncore=self.uncore or 'Unknown',
+            analogio = self.analogio or 'Unknown'
         )
 
 
