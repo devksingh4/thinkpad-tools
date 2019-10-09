@@ -110,11 +110,11 @@ class Undervolt(object):
                 pass
             if prop == "gpu":
                 plane = 1
-            if prop = "cache":
+            if prop == "cache":
                 plane = 2
-            if prop = "uncore":
+            if prop == "uncore":
                 plane = 3
-            if prop = "analogio":
+            if prop == "analogio":
                 plane = 4
             error: int = undervolt(self.__dict__[prop], plane)
             if error != 0:
