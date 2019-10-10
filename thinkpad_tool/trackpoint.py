@@ -113,8 +113,10 @@ class TrackPointHandler(object):
             epilog=USAGE_EXAMPLES,
             formatter_class=argparse.RawDescriptionHelpFormatter
         )
-        self.parser.add_argument('verb', type=str, help='The action going to take')
-        self.parser.add_argument('arguments', nargs='*', help='Arguments of the action')
+        self.parser.add_argument(
+            'verb', type=str, help='The action going to take')
+        self.parser.add_argument(
+            'arguments', nargs='*', help='Arguments of the action')
         self.inner: TrackPoint = TrackPoint()
 
     def run(self, unparsed_args: list):
