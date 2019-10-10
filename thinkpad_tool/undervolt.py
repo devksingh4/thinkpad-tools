@@ -18,7 +18,7 @@ if os.geteuid() != 0:
     os.execvp("sudo", ["sudo"] + sys.argv)
 
 # PLANE KEY:
-# Plane 0: Core 
+# Plane 0: Core
 # Plane 1: GPU
 # Plane 2: Cache
 # Plane 3: Uncore
@@ -35,11 +35,10 @@ Current status:
 USAGE_HEAD: str = '''\
 thinkpad-tool undervolt <verb> [argument]
 
-Supported verbs are:prop = 
+Supported verbs are:
     status          Print all properties
     set-<property>  Set value
     get-<property>  Get property
-    
 Available properties: core, gpu, cache, uncore, analogio
 '''
 
@@ -50,6 +49,8 @@ thinkpad-tool trackpoint status
 thinkpad-tool trackpoint set-core -20
 thinkpad-tool trackpoint get-gpu
 '''
+
+
 class Undervolt(object):
     """
     Class to handle requests related to Undervolting
@@ -57,44 +58,48 @@ class Undervolt(object):
 
     def __init__(
             self,
-            core: float or None = None,
-            gpu: float or None = None,
-            cache: float or None = None,
-            uncore: float or None = None,
-            analogio: float or None = None,
+            core: float = 0,
+            gpu: float = 0,
+            cache: float = 0,
+            uncore: float = 0,
+            analogio: float = 0,
     ):
-        self.__register: str = "0x150"
-        self.__undervolt_value: str = "0x80000"
+        # self.__register: str = "0x150"
+        # self.__undervolt_value: str = "0x80000"
         self.core = core
         self.gpu = gpu
         self.cache = cache
         self.uncore = uncore
         self.analogio = analogio
-    def undervolt(self, mv, plane):
+
+    def __undervolt(self, mv, plane):
         """
         Apply undervolt to system MSR for Intel-based systems
         :return: int error: error code to pass
         """
-        error: int = 0
-        uv_value: str = format(0xFFE00000&( (round(mv*1.024)&0xFFF) <<21), '08x').upper()
-        final_val: int = int(("0x80000" + str(plane) + "11" + uv_value), 16)
+        error = 0
+        uv_value = format(0xFFE00000 &
+                            ((round(mv*1.024) & 0xFFF) << 21), '08x').upper()
+        final_val = int(("0x80000" + str(plane) + "11" + uv_value), 16)
         n: list = glob.glob('/dev/cpu/[0-9]*/msr')
         for c in n:
             f: int = os.open(c, os.O_WRONLY)
-            os.lseek(f, 0x150, os.SEEK_SET) # MSR register 0x150
-            os.write(f, struct.pack('Q', final_val)) # Write final val
+            os.lseek(f, 0x150, os.SEEK_SET)  # MSR register 0x150
+            os.write(f, struct.pack('Q', final_val))  # Write final val
             os.close(f)
         if not n:
-            raise OSError("MSR not available. Is Secure Boot Disabled? If not, it must be disabled for this to work.")
+            raise OSError("MSR not available. Is Secure Boot Disabled? \
+                If not, it must be disabled for this to work.")
             error = 1
         return error
+
     def read_values(self):
         """
         Read values from the system
         :return: Nothing
         """
         for prop in self.__dict__.keys():
-            pass # insert code here
+            pass  # insert code here
 
     def set_values(self):
         """
@@ -115,7 +120,7 @@ class Undervolt(object):
                 plane = 3
             if prop == "analogio":
                 plane = 4
-            error: int = self.undervolt(self.__dict__[prop], plane)
+            error: int = self.__undervolt(int(self.__dict__[prop]), plane)
             if error != 0:
                 success = False
                 failures.append(str(error))
@@ -132,7 +137,7 @@ class Undervolt(object):
             gpu=self.gpu or 'Unknown',
             cache=self.cache or 'Unknown',
             uncore=self.uncore or 'Unknown',
-            analogio = self.analogio or 'Unknown'
+            analogio=self.analogio or 'Unknown'
         )
 
 
@@ -148,8 +153,10 @@ class UndervoltHandler(object):
             epilog=USAGE_EXAMPLES,
             formatter_class=argparse.RawDescriptionHelpFormatter
         )
-        self.parser.add_argument('verb', type=str, help='The action going to take')
-        self.parser.add_argument('arguments', nargs='*', help='Arguments of the action')
+        self.parser.add_argument('verb', type=str, help='The action going to \
+            take')
+        self.parser.add_argument('arguments', nargs='*',
+            help='Arguments of the action')
         self.inner: Undervolt = Undervolt()
 
     def run(self, unparsed_args: list):
@@ -166,7 +173,7 @@ class UndervoltHandler(object):
             :return: Nothing, the problem exits with the given exit code
             """
             print(
-                'Invalid command "%s", available properties: ' % prop_name +\
+                'Invalid command "%s", available properties: ' % prop_name +
                 ', '.join(self.inner.__dict__.keys()),
                 file=sys.stderr
             )
@@ -193,6 +200,7 @@ class UndervoltHandler(object):
             if prop not in self.inner.__dict__.keys():
                 invalid_property(prop, 1)
             self.inner.__dict__[prop] = str(''.join(args.arguments))
+            print(self.inner.__dict__[prop])
             self.inner.set_values()
             print(self.inner.get_status_str())
             return
