@@ -33,7 +33,7 @@ class UndervoltSystem(object):
     def readUndervolt(self, plane):
         """
         Read undervolt offset on given plane
-        :return: int offset: offset on plane
+        :return: str val: offset on plane in hex
         """
         offset: int = 0 or None
         n: str = '/dev/cpu/%d/msr' % (0,)
@@ -41,3 +41,4 @@ class UndervoltSystem(object):
         os.lseek(f, 0x150, os.SEEK_SET)
         val, = unpack('Q', os.read(f, 8))  # val now contains the MSR value
         os.close(f)
+        return str(val)

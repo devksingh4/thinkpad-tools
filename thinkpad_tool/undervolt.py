@@ -94,12 +94,13 @@ class Undervolt(object):
             if prop == "analogio":
                 plane = 4
             try:
-                system.readUndervolt(plane)
+                h: str = system.readUndervolt(plane)
             except Exception as e:
                 success = False
                 failures.append(str(e))
         if not success:
             raise ApplyValueFailedException(', '.join(failures))
+        self.__dict__[prop] = h
 
     def set_values(self):
         """
