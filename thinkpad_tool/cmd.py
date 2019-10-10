@@ -37,6 +37,8 @@ thinkpad-tool trackpoint status
 thinkpad-tool trackpoint set-sensitivity 20
 thinkpad-tool battery list
 thinkpad-tool battery status all
+thinkpad-tool undervolt set-core -20
+thinkpad-tool undervolt status
 '''
 
 

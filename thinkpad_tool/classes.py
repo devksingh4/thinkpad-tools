@@ -9,7 +9,7 @@ class UndervoltSystem(object):
     def __init__(self):
         pass
 
-    def undervolt(self, mv, plane):
+    def applyUndervolt(self, mv, plane):
         """
         Apply undervolt to system MSR for Intel-based systems
         :return: int error: error code to pass

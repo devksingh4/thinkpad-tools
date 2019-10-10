@@ -124,7 +124,7 @@ class Undervolt(object):
             if prop == "analogio":
                 plane = 4
             try:
-                system.undervolt(int(self.__dict__[prop]), plane)
+                system.applyUndervolt(int(self.__dict__[prop]), plane)
             except Exception as e:
                 success = False
                 failures.append(str(e))
