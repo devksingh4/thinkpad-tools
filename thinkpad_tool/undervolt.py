@@ -5,11 +5,12 @@ Undervolt related stuff
 """
 
 import os
-import glob
 import sys
 import pathlib
 import argparse
-import struct
+import thinkpad_tool.classes
+from thinkpad_tool.utils import ApplyValueFailedException as ApplyValueFailedException
+
 if os.geteuid() != 0:
     # os.execvp() replaces the running process, rather than launching a child
     # process, so there's no need to exit afterwards. The extra "sudo" in the
@@ -72,40 +73,40 @@ class Undervolt(object):
         self.uncore = uncore
         self.analogio = analogio
 
-    def __undervolt(self, mv, plane):
-        """
-        Apply undervolt to system MSR for Intel-based systems
-        :return: int error: error code to pass
-        """
-        error = 0
-        uv_value = format(
-            0xFFE00000 & ((round(mv*1.024) & 0xFFF) << 21), '08x').upper()
-        final_val = int(("0x80000" + str(plane) + "11" + uv_value), 16)
-        n: list = glob.glob('/dev/cpu/[0-9]*/msr')
-        for c in n:
-            f: int = os.open(c, os.O_WRONLY)
-            os.lseek(f, 0x150, os.SEEK_SET)  # MSR register 0x150
-            os.write(f, struct.pack('Q', final_val))  # Write final val
-            os.close(f)
-        if not n:
-            raise OSError("MSR not available. Is Secure Boot Disabled? \
-                If not, it must be disabled for this to work.")
-            error = 1
-        return error
-
     def read_values(self):
         """
         Read values from the system
         :return: Nothing
         """
+        success = True
+        failures: list = list()
+        system = thinkpad_tool.classes.UndervoltSystem()
         for prop in self.__dict__.keys():
-            pass
+            plane: int = 0
+            if prop == "core":
+                pass
+            if prop == "gpu":
+                plane = 1
+            if prop == "cache":
+                plane = 2
+            if prop == "uncore":
+                plane = 3
+            if prop == "analogio":
+                plane = 4
+            try:
+                system.readUndervolt(plane)
+            except Exception as e:
+                success = False
+                failures.append(str(e))
+        if not success:
+            raise ApplyValueFailedException(', '.join(failures))
 
     def set_values(self):
         """
         Set values to the system MSR using undervolt function
         :return: Nothing
         """
+        system = thinkpad_tool.classes.UndervoltSystem()
         success: bool = True
         failures: list = list()
         for prop in self.__dict__.keys():
@@ -123,12 +124,10 @@ class Undervolt(object):
             if prop == "analogio":
                 plane = 4
             try:
-                error: int = self.__undervolt(int(self.__dict__[prop]), plane)
+                system.undervolt(int(self.__dict__[prop]), plane)
             except Exception as e:
-                failures.append(str(e))
-            if error != 0:
                 success = False
-                failures.append(str(error))
+                failures.append(str(e))
         if not success:
             raise ApplyValueFailedException(', '.join(failures))
 

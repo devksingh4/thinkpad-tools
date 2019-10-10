@@ -4,7 +4,7 @@
 Trackpoint related stuff
 """
 
-
+from .utils import ApplyValueFailedException
 import os
 import sys
 import pathlib
@@ -16,7 +16,6 @@ if os.geteuid() != 0:
     # in the new process.
     os.execvp("sudo", ["sudo"] + sys.argv)
 
-from .utils import ApplyValueFailedException
 
 BASE_PATH = pathlib.PurePath('/sys/devices/platform/i8042/serio1/serio2')
 
@@ -33,7 +32,6 @@ Supported verbs are:
     status          Print all properties
     set-<property>  Set value
     get-<property>  Get property
-    
 Available properties: sensitivity, speed
 '''
 
@@ -133,7 +131,7 @@ class TrackPointHandler(object):
             :return: Nothing, the problem exits with the given exit code
             """
             print(
-                'Invalid command "%s", available properties: ' % prop_name +\
+                'Invalid command "%s", available properties: ' % prop_name +
                 ', '.join(self.inner.__dict__.keys()),
                 file=sys.stderr
             )
