@@ -78,8 +78,8 @@ class Undervolt(object):
         :return: int error: error code to pass
         """
         error = 0
-        uv_value = format(0xFFE00000 &
-                            ((round(mv*1.024) & 0xFFF) << 21), '08x').upper()
+        uv_value = format(
+            0xFFE00000 & ((round(mv*1.024) & 0xFFF) << 21), '08x').upper()
         final_val = int(("0x80000" + str(plane) + "11" + uv_value), 16)
         n: list = glob.glob('/dev/cpu/[0-9]*/msr')
         for c in n:
@@ -99,7 +99,7 @@ class Undervolt(object):
         :return: Nothing
         """
         for prop in self.__dict__.keys():
-            pass  # insert code here
+            pass
 
     def set_values(self):
         """
@@ -155,8 +155,8 @@ class UndervoltHandler(object):
         )
         self.parser.add_argument('verb', type=str, help='The action going to \
             take')
-        self.parser.add_argument('arguments', nargs='*',
-            help='Arguments of the action')
+        self.parser.add_argument(
+            'arguments', nargs='*', help='Arguments of the action')
         self.inner: Undervolt = Undervolt()
 
     def run(self, unparsed_args: list):
