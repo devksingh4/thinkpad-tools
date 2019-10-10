@@ -9,8 +9,7 @@ import sys
 import pathlib
 import argparse
 import thinkpad_tool.classes
-from thinkpad_tool.utils
-import ApplyValueFailedException as ApplyValueFailedException
+from thinkpad_tool.utils import ApplyValueFailedException
 
 if os.geteuid() != 0:
     # os.execvp() replaces the running process, rather than launching a child

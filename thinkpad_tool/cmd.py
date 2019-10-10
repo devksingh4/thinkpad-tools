@@ -27,7 +27,6 @@ Supported properties are:
     trackpoint      Things related to TrackPoints
     battery         Things related to batteries
     undervolt       Things related to undervolting
-    
 '''
 
 USAGE_EXAMPLES = '''\
@@ -55,7 +54,8 @@ def commandline_parser(unparsed_args: None or list = None):
         epilog=USAGE_EXAMPLES,
         formatter_class=argparse.RawDescriptionHelpFormatter
     )
-    parser.add_argument('property', type=str, help='Property going to take action')
+    parser.add_argument(
+        'property', type=str, help='Property going to take action')
     prop = str(parser.parse_args(unparsed_args[0:1]).property).lower()
     if prop == 'trackpoint':
         handler = TrackPointHandler()
