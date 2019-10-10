@@ -58,11 +58,11 @@ class Undervolt(object):
 
     def __init__(
             self,
-            core: float = 0,
-            gpu: float = 0,
-            cache: float = 0,
-            uncore: float = 0,
-            analogio: float = 0,
+            core: float or None = None,
+            gpu: float or None = None,
+            cache: float or None = None,
+            uncore: float or None = None,
+            analogio: float or None = None,
     ):
         # self.__register: str = "0x150"
         # self.__undervolt_value: str = "0x80000"
@@ -109,6 +109,8 @@ class Undervolt(object):
         success: bool = True
         failures: list = list()
         for prop in self.__dict__.keys():
+            if self.__dict__[prop] is None:
+                continue
             plane: int = 0
             if prop == "core":
                 pass
