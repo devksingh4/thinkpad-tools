@@ -122,7 +122,10 @@ class Undervolt(object):
                 plane = 3
             if prop == "analogio":
                 plane = 4
-            error: int = self.__undervolt(int(self.__dict__[prop]), plane)
+            try:
+                error: int = self.__undervolt(int(self.__dict__[prop]), plane)
+            except Exception as e:
+                failures.append(str(e))
             if error != 0:
                 success = False
                 failures.append(str(error))
