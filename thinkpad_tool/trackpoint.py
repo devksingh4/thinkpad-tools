@@ -17,7 +17,7 @@ if os.geteuid() != 0:
     os.execvp("sudo", ["sudo"] + sys.argv)
 
 
-BASE_PATH = pathlib.PurePath('/sys/devices/platform/i8042/serio1/serio2')
+BASE_PATH = pathlib.PurePath('/sys/devices/rmi4-00/rmi4-00.fn03/serio2')
 
 STATUS_TEXT = '''\
 Current status:
