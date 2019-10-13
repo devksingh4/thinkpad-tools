@@ -77,7 +77,6 @@ Supported verbs are:
     status          Print all properties
     set-<property>  Set value
     get-<property>  Get property
-    
 Readable properties: {properties}
 Editable properties: {editable_properties}
 '''.format(
@@ -105,7 +104,7 @@ class Battery(object):
         self.path: pathlib.PurePath = BASE_DIR / self.name
         for prop, default_value in PROPERTIES.items():
             if prop in kwargs.keys():
-                if type(default_value) == type(kwargs[prop]):
+                if isInstance(kwargs[prop], default_value):
                     self.__dict__[prop] = kwargs[prop]
             self.__dict__[prop] = default_value
         self.battery_health: int = 100
@@ -126,7 +125,8 @@ class Battery(object):
                     self.__dict__[prop] = bool(content)
                 else:
                     self.__dict__[prop] = int(content)
-        self.battery_health: int = int(self.energy_full / self.energy_full_design * 100)
+        self.battery_health: int = int(
+            self.energy_full / self.energy_full_design * 100)
 
     def set_values(self):
         """
@@ -138,7 +138,8 @@ class Battery(object):
         for prop in EDITABLE_PROPERTIES:
             if prop not in self.__dict__.keys():
                 success = False
-                failures.append('Property "%s" not found in current object' % prop)
+                failures.append(
+                    'Property "%s" not found in current object' % prop)
                 continue
             path = str(self.path / prop)
             if os.path.isfile(path):
@@ -195,9 +196,12 @@ class BatteryHandler(object):
             epilog=USAGE_EXAMPLES,
             formatter_class=argparse.RawDescriptionHelpFormatter
         )
-        self.parser.add_argument('verb', type=str, help='The action going to take')
-        self.parser.add_argument('battery', nargs='?', type=str, help='The battery')
-        self.parser.add_argument('arguments', nargs='*', help='Arguments of the action')
+        self.parser.add_argument(
+            'verb', type=str, help='The action going to take')
+        self.parser.add_argument(
+            'battery', nargs='?', type=str, help='The battery')
+        self.parser.add_argument(
+            'arguments', nargs='*', help='Arguments of the action')
         self.inner: dict = dict()
         for name in os.listdir(str(BASE_DIR)):
             if not name.startswith('BAT'):
@@ -222,7 +226,8 @@ class BatteryHandler(object):
                 pattern: re.Pattern = re.compile(battery_name)
             except re.error as e:
                 print(
-                    'Invalid matching pattern "%s", %s' % (battery_name, str(e)),
+                    'Invalid matching pattern "%s", %s' % (
+                        battery_name, str(e)),
                     file=sys.stderr
                 )
                 exit(1)
@@ -235,13 +240,15 @@ class BatteryHandler(object):
             :return: Nothing, the program exits with status code 1
             """
             print(
-                'No battery found for pattern"%s", available battery(ies): ' % battery_name +
+                'No battery found for pattern"%s", \
+                available battery(ies): ' % battery_name +
                 ', '.join(self.inner.keys()),
                 file=sys.stderr
             )
             exit(1)
 
-        def invalid_property(prop_name: str, battery_name: str, exit_code: int):
+        def invalid_property(
+                prop_name: str, battery_name: str, exit_code: int):
             """
             Invalid property
             :param prop_name: Name of the property

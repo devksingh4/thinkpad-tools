@@ -4,7 +4,7 @@
 Trackpoint related stuff
 """
 
-
+from .utils import ApplyValueFailedException
 import os
 import sys
 import pathlib
@@ -16,7 +16,6 @@ if os.geteuid() != 0:
     # in the new process.
     os.execvp("sudo", ["sudo"] + sys.argv)
 
-from .utils import ApplyValueFailedException
 
 BASE_PATH = pathlib.PurePath('/sys/devices/rmi4-00/rmi4-00.fn03/serio2')
 
@@ -33,7 +32,6 @@ Supported verbs are:
     status          Print all properties
     set-<property>  Set value
     get-<property>  Get property
-    
 Available properties: sensitivity, speed
 '''
 
@@ -115,8 +113,10 @@ class TrackPointHandler(object):
             epilog=USAGE_EXAMPLES,
             formatter_class=argparse.RawDescriptionHelpFormatter
         )
-        self.parser.add_argument('verb', type=str, help='The action going to take')
-        self.parser.add_argument('arguments', nargs='*', help='Arguments of the action')
+        self.parser.add_argument(
+            'verb', type=str, help='The action going to take')
+        self.parser.add_argument(
+            'arguments', nargs='*', help='Arguments of the action')
         self.inner: TrackPoint = TrackPoint()
 
     def run(self, unparsed_args: list):
@@ -133,7 +133,7 @@ class TrackPointHandler(object):
             :return: Nothing, the problem exits with the given exit code
             """
             print(
-                'Invalid command "%s", available properties: ' % prop_name +\
+                'Invalid command "%s", available properties: ' % prop_name +
                 ', '.join(self.inner.__dict__.keys()),
                 file=sys.stderr
             )

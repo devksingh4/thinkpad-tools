@@ -6,6 +6,7 @@ ThinkPad-tool commandline wrapper
 """
 import os
 import sys
+from thinkpad_tool.cmd import commandline_parser
 
 
 if os.geteuid() != 0:
@@ -15,7 +16,6 @@ if os.geteuid() != 0:
     # in the new process.
     os.execvp("sudo", ["sudo"] + sys.argv)
 
-from thinkpad_tool.cmd import commandline_parser
 
 if __name__ == '__main__':
     commandline_parser(sys.argv[1:])

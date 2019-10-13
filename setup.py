@@ -10,10 +10,12 @@ from setuptools import find_packages, setup
 
 setup(
     name='thinkpad_tool',
-    version='0.0.1',
+    maintainer="Dev Singh",
+    maintainer_email="devksingh4@gmail.com",
+    version='0.9.1',
     description='Tools for ThinkPads',
     platforms=['Linux'],
-    keywords='thinkpad trackpoint battery',
+    keywords='thinkpad trackpoint battery undervolt',
     packages=find_packages(),
     license='GPLv3',
     scripts=['thinkpad-tool']
