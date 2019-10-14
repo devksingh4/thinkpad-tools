@@ -9,7 +9,7 @@ Tools created to manage thinkpad properties
 * Undervolting CPU (Can write values but cannot read them)
 
 ## Planned Features
-None right now, but feel free to suggest some in issues!
+None right now, but feel free to suggest one in issues!
 
 While most of these tools exist seperately, it would be nice to have a first-class linux tool that allows all of the above to be managed all in one place. This is why I started development on thinkpad-tools. 
 
