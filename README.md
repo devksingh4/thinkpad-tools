@@ -5,7 +5,7 @@ Tools created to manage thinkpad properties
 * Adjusting Trackpoint Speed and Sensitivity
 * Managing battery/batteries
   * Setting Charge Stop and Start thresholds
-  * Checking battery health (cli tool not working but working in scripts)
+  * Checking battery health
 * Undervolting CPU (Can write values but cannot read them)
 
 ## Planned Features
