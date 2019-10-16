@@ -9,7 +9,7 @@ from setuptools import find_packages, setup
 
 
 setup(
-    name='thinkpad_tool',
+    name='thinkpad-tools',
     maintainer="Dev Singh",
     maintainer_email="devksingh4@gmail.com",
     version='0.9.1',
@@ -18,5 +18,5 @@ setup(
     keywords='thinkpad trackpoint battery undervolt',
     packages=find_packages(),
     license='GPLv3',
-    scripts=['thinkpad-tool']
+    scripts=['thinkpad-tools']
 )

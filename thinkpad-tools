@@ -2,11 +2,11 @@
 # -*- encoding: utf-8 -*-
 
 """
-ThinkPad-tool commandline wrapper
+ThinkPad-tools commandline wrapper
 """
 import os
 import sys
-from thinkpad_tool.cmd import commandline_parser
+from assets.cmd import commandline_parser
 
 if __name__ == '__main__':
     commandline_parser(sys.argv[1:])

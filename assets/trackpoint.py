@@ -1,131 +1,111 @@
-# undervolt.py
+# trackpoint.py
 
 """
-Undervolt related stuff
+Trackpoint related stuff
 """
 
+from .utils import ApplyValueFailedException, NotSudo
 import os
 import sys
 import pathlib
 import argparse
-import thinkpad_tool.classes
-from thinkpad_tool.utils import ApplyValueFailedException, NotSudo
-
 
 if os.getuid() != 0:
     raise NotSudo("Script must be run as superuser/sudo")
 
-# PLANE KEY:
-# Plane 0: Core
-# Plane 1: GPU
-# Plane 2: Cache
-# Plane 3: Uncore
-# Plane 4: Analogio
+if os.path.exists("/sys/devices/rmi4-00/rmi4-00.fn03/serio2"):
+    BASE_PATH = pathlib.PurePath('/sys/devices/rmi4-00/rmi4-00.fn03/serio2')
+else:
+    BASE_PATH = pathlib.PurePath('/sys/devices/platform/i8042/serio1/serio2')
 
 STATUS_TEXT = '''\
 Current status:
-  Core:                    {core}\n
-  GPU:                     {gpu}\n
-  Cache:                   {cache}\n
-  Uncore:                  {uncore}\n
-  Analogio:                {analogio}\n
+  Sensitivity:             {sensitivity}
+  Speed:                   {speed}\
 '''
+
 USAGE_HEAD: str = '''\
-thinkpad-tool undervolt <verb> [argument]
+thinkpad-tools trackpoint <verb> [argument]
 
 Supported verbs are:
-    status          Print all properties
-    set-<property>  Set value
-    get-<property>  Get property
-Available properties: core, gpu, cache, uncore, analogio
+    status              Print all properties
+    set-<property>      Set value
+    get-<property>      Get property
+    disable             Disable trackpoint
+Available properties: sensitivity, speed
 '''
 
 USAGE_EXAMPLES: str = '''\
 Examples:
 
-thinkpad-tool trackpoint status
-thinkpad-tool trackpoint set-core -20
-thinkpad-tool trackpoint get-gpu
+thinkpad-tools trackpoint status
+thinkpad-tools trackpoint set-sensitivity 20
+thinkpad-tools trackpoint get-speed
+thinkpad-tools trackpoint disable
 '''
 
 
-class Undervolt(object):
+class TrackPoint(object):
     """
-    Class to handle requests related to Undervolting
+    Class to handle requests related to TrackPoints
     """
 
     def __init__(
             self,
-            core: float or None = None,
-            gpu: float or None = None,
-            cache: float or None = None,
-            uncore: float or None = None,
-            analogio: float or None = None,
+            sensitivity: int or None = None,
+            speed: int or None = None
     ):
-        # self.__register: str = "0x150"
-        # self.__undervolt_value: str = "0x80000"
-        self.core = core
-        self.gpu = gpu
-        self.cache = cache
-        self.uncore = uncore
-        self.analogio = analogio
+        self.sensitivity = sensitivity
+        self.speed = speed
 
     def read_values(self):
         """
         Read values from the system
         :return: Nothing
         """
-        success = True
-        failures: list = list()
-        system = thinkpad_tool.classes.UndervoltSystem()
         for prop in self.__dict__.keys():
-            plane: int = 0
-            if prop == "core":
-                pass
-            if prop == "gpu":
-                plane = 1
-            if prop == "cache":
-                plane = 2
-            if prop == "uncore":
-                plane = 3
-            if prop == "analogio":
-                plane = 4
-            try:
-                h: str = system.readUndervolt(plane)
-            except Exception as e:
-                success = False
-                failures.append(str(e))
-        if not success:
-            raise ApplyValueFailedException(', '.join(failures))
-        self.__dict__[prop] = h
+            file_path: str = str(BASE_PATH / prop)
+            if os.path.isfile(file_path):
+                with open(file_path) as file:
+                    self.__dict__[prop] = file.readline()
+            else:
+                self.__dict__[prop] = None
 
     def set_values(self):
         """
-        Set values to the system MSR using undervolt function
+        Set values to the system
         :return: Nothing
         """
-        system = thinkpad_tool.classes.UndervoltSystem()
         success: bool = True
         failures: list = list()
         for prop in self.__dict__.keys():
-            if self.__dict__[prop] is None:
-                continue
-            plane: int = 0
-            if prop == "core":
-                pass
-            if prop == "gpu":
-                plane = 1
-            if prop == "cache":
-                plane = 2
-            if prop == "uncore":
-                plane = 3
-            if prop == "analogio":
-                plane = 4
-            try:
-                system.applyUndervolt(int(self.__dict__[prop]), plane)
-            except Exception as e:
-                success = False
-                failures.append(str(e))
+            file_path: str = str(BASE_PATH / prop)
+            if os.path.isfile(file_path):
+                try:
+                    with open(file_path, 'w') as file:
+                        file.write(self.__dict__[prop])
+                except Exception as e:
+                    success = False
+                    failures.append(str(e))
+        if not success:
+            raise ApplyValueFailedException(', '.join(failures))
+
+    def disableTrackpoint(self):
+        """
+        Disable the trackpoint
+        :return: Nothing
+        """
+        success: bool = True
+        failures: list = list()
+        for prop in self.__dict__.keys():
+            file_path: str = str(BASE_PATH / prop)
+            if os.path.isfile(file_path):
+                try:
+                    with open(file_path, 'w') as file:
+                        file.write('0')
+                except Exception as e:
+                    success = False
+                    failures.append(str(e))
         if not success:
             raise ApplyValueFailedException(', '.join(failures))
 
@@ -135,31 +115,29 @@ class Undervolt(object):
         :return: str: status string
         """
         return STATUS_TEXT.format(
-            core=self.core or 'Unknown',
-            gpu=self.gpu or 'Unknown',
-            cache=self.cache or 'Unknown',
-            uncore=self.uncore or 'Unknown',
-            analogio=self.analogio or 'Unknown'
+            sensitivity=self.sensitivity or 'Unknown',
+            speed=self.speed or 'Unknown'
         )
 
 
-class UndervoltHandler(object):
+class TrackPointHandler(object):
     """
-    Handler for Undervolt related commands
+    Handler for TrackPoint related commands
     """
+
     def __init__(self):
         self.parser: argparse.ArgumentParser = argparse.ArgumentParser(
-            prog='thinkpad-tool undervolt',
-            description='Undervolt related commands',
+            prog='thinkpad-tools trackpoint',
+            description='TrackPoint related commands',
             usage=USAGE_HEAD,
             epilog=USAGE_EXAMPLES,
             formatter_class=argparse.RawDescriptionHelpFormatter
         )
-        self.parser.add_argument('verb', type=str, help='The action going to \
-            take')
+        self.parser.add_argument(
+            'verb', type=str, help='The action going to take')
         self.parser.add_argument(
             'arguments', nargs='*', help='Arguments of the action')
-        self.inner: Undervolt = Undervolt()
+        self.inner: TrackPoint = TrackPoint()
 
     def run(self, unparsed_args: list):
         """
@@ -202,7 +180,6 @@ class UndervoltHandler(object):
             if prop not in self.inner.__dict__.keys():
                 invalid_property(prop, 1)
             self.inner.__dict__[prop] = str(''.join(args.arguments))
-            print(self.inner.__dict__[prop])
             self.inner.set_values()
             print(self.inner.get_status_str())
             return
@@ -220,7 +197,10 @@ class UndervoltHandler(object):
                 exit(1)
             print(self.inner.__dict__[prop])
             return
-
+        if verb == 'disable':
+            self.inner.disableTrackpoint()
+            print(self.inner.get_status_str())
+            return
         # No match found
         print('Command "%s" not found' % verb, file=sys.stderr)
         exit(1)

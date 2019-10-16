@@ -17,7 +17,7 @@ BASE_DIR = pathlib.Path('/etc/thinkpad-tool/')
 DEFAULT_CONFIG_PATH = BASE_DIR / 'config.ini'
 
 USAGE_HEAD = '''\
-thinkpad-tool <property> <action> [<args>]
+thinkpad-tools <property> <action> [<args>]
 
 Supported properties are:
     trackpoint      Things related to TrackPoints
@@ -28,12 +28,12 @@ Supported properties are:
 USAGE_EXAMPLES = '''\
 Examples:
 
-thinkpad-tool trackpoint status
-thinkpad-tool trackpoint set-sensitivity 20
-thinkpad-tool battery list
-thinkpad-tool battery status all
-thinkpad-tool undervolt set-core -20
-thinkpad-tool undervolt status
+thinkpad-tools trackpoint status
+thinkpad-tools trackpoint set-sensitivity 20
+thinkpad-tools battery list
+thinkpad-tools battery status all
+thinkpad-tools undervolt set-core -20
+thinkpad-tools undervolt status
 '''
 
 
@@ -44,7 +44,7 @@ def commandline_parser(unparsed_args: None or list = None):
     :return: Nothing
     """
     parser = argparse.ArgumentParser(
-        prog='thinkpad_tool',
+        prog='thinkpad-tools',
         description='Tool for ThinkPads',
         usage=USAGE_HEAD,
         epilog=USAGE_EXAMPLES,

@@ -67,7 +67,7 @@ Status of battery "{name}":
 '''
 
 USAGE_HEAD: str = '''\
-thinkpad-tool battery <verb> <battery> [argument]
+thinkpad-tools battery <verb> <battery> [argument]
 
 Regex can be used in <battery> to match multiple batteries
 
@@ -86,10 +86,10 @@ Editable properties: {editable_properties}
 USAGE_EXAMPLES: str = '''\
 Examples:
 
-thinkpad-tool battery list
-thinkpad-tool battery set-charge-start-threshold all 80
-thinkpad-tool battery set-stop-start-threshold BAT0 90
-thinkpad-tool battery get-battery-health
+thinkpad-tools battery list
+thinkpad-tools battery set-charge-start-threshold all 80
+thinkpad-tools battery set-stop-start-threshold BAT0 90
+thinkpad-tools battery get-battery-health
 '''
 
 
@@ -189,7 +189,7 @@ class BatteryHandler(object):
 
     def __init__(self):
         self.parser: argparse.ArgumentParser = argparse.ArgumentParser(
-            prog='thinkpad-tool battery',
+            prog='thinkpad-tools battery',
             description='Battery related commands',
             usage=USAGE_HEAD,
             epilog=USAGE_EXAMPLES,
