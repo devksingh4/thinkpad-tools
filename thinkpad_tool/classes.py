@@ -2,6 +2,7 @@ import os
 import glob
 import sys
 import struct
+import subprocess
 from struct import pack, unpack
 
 
@@ -18,12 +19,18 @@ class UndervoltSystem(object):
         uv_value = format(
             0xFFE00000 & ((round(mv*1.024) & 0xFFF) << 21), '08x').upper()
         final_val = int(("0x80000" + str(plane) + "11" + uv_value), 16)
+        print('reached point 0')
         n: list = glob.glob('/dev/cpu/[0-9]*/msr')
+        print('reached point 0.5')
         for c in n:
             f: int = os.open(c, os.O_WRONLY)
+            print('reached point 1')
             os.lseek(f, 0x150, os.SEEK_SET)  # MSR register 0x150
+            print('reached point 2')
             os.write(f, struct.pack('Q', final_val))  # Write final val
+            print('reached point 3')
             os.close(f)
+            print('reached point 4')
         if not n:
             raise OSError("MSR not available. Is Secure Boot Disabled? \
                 If not, it must be disabled for this to work.")

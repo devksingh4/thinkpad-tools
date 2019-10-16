@@ -4,17 +4,14 @@
 Trackpoint related stuff
 """
 
-from .utils import ApplyValueFailedException
+from .utils import ApplyValueFailedException, NotSudo
 import os
 import sys
 import pathlib
 import argparse
-if os.geteuid() != 0:
-    # os.execvp() replaces the running process, rather than launching a child
-    # process, so there's no need to exit afterwards. The extra "sudo" in the
-    # second parameter is required because Python doesn't automatically set
-    # $0 in the new process.
-    os.execvp("sudo", ["sudo"] + sys.argv)
+
+if os.getuid() != 0:
+    raise NotSudo("Script must be run as superuser/sudo")
 
 if os.path.exists("/sys/devices/rmi4-00/rmi4-00.fn03/serio2"):
     BASE_PATH = pathlib.PurePath('/sys/devices/rmi4-00/rmi4-00.fn03/serio2')

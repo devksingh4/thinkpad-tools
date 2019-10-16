@@ -9,14 +9,11 @@ import sys
 import pathlib
 import argparse
 import thinkpad_tool.classes
-from thinkpad_tool.utils import ApplyValueFailedException
+from thinkpad_tool.utils import ApplyValueFailedException, NotSudo
 
-if os.geteuid() != 0:
-    # os.execvp() replaces the running process, rather than launching a child
-    # process, so there's no need to exit afterwards. The extra "sudo" in the
-    # second parameter is required because Python doesn't automatically set
-    # $0 in the new process.
-    os.execvp("sudo", ["sudo"] + sys.argv)
+
+if os.getuid() != 0:
+    raise NotSudo("Script must be run as superuser/sudo")
 
 # PLANE KEY:
 # Plane 0: Core

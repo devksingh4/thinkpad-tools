@@ -8,14 +8,5 @@ import os
 import sys
 from thinkpad_tool.cmd import commandline_parser
 
-
-if os.geteuid() != 0:
-    # os.execvp() replaces the running process, rather than launching a child
-    # process, so there's no need to exit afterwards. The extra "sudo" in the
-    # second parameter is required because Python doesn't automatically set $0
-    # in the new process.
-    os.execvp("sudo", ["sudo"] + sys.argv)
-
-
 if __name__ == '__main__':
     commandline_parser(sys.argv[1:])
