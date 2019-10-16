@@ -11,12 +11,12 @@ import argparse
 import thinkpad_tool.classes
 from thinkpad_tool.utils import ApplyValueFailedException
 
-if os.geteuid() != 0:
-    # os.execvp() replaces the running process, rather than launching a child
-    # process, so there's no need to exit afterwards. The extra "sudo" in the
-    # second parameter is required because Python doesn't automatically set $0
-    # in the new process.
-    os.execvp("sudo", ["sudo"] + sys.argv)
+# if os.geteuid() != 0:
+#     # os.execvp() replaces the running process, rather than launching a child
+#     # process, so there's no need to exit afterwards. The extra "sudo" in the
+#     # second parameter is required because Python doesn't automatically set $0
+#     # in the new process.
+#     os.execvp("sudo", ["sudo"] + sys.argv)
 
 # PLANE KEY:
 # Plane 0: Core

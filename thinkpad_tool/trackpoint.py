@@ -12,8 +12,8 @@ import argparse
 if os.geteuid() != 0:
     # os.execvp() replaces the running process, rather than launching a child
     # process, so there's no need to exit afterwards. The extra "sudo" in the
-    # second parameter is required because Python doesn't automatically set $0
-    # in the new process.
+    # second parameter is required because Python doesn't automatically set
+    # $0 in the new process.
     os.execvp("sudo", ["sudo"] + sys.argv)
 
 if os.path.exists("/sys/devices/rmi4-00/rmi4-00.fn03/serio2"):
