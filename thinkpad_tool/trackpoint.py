@@ -31,9 +31,10 @@ USAGE_HEAD: str = '''\
 thinkpad-tool trackpoint <verb> [argument]
 
 Supported verbs are:
-    status          Print all properties
-    set-<property>  Set value
-    get-<property>  Get property
+    status              Print all properties
+    set-<property>      Set value
+    get-<property>      Get property
+    disable             Disable trackpoint
 Available properties: sensitivity, speed
 '''
 
@@ -43,6 +44,7 @@ Examples:
 thinkpad-tool trackpoint status
 thinkpad-tool trackpoint set-sensitivity 20
 thinkpad-tool trackpoint get-speed
+thinkpad-tool trackpoint disable
 '''
 
 
@@ -85,6 +87,25 @@ class TrackPoint(object):
                 try:
                     with open(file_path, 'w') as file:
                         file.write(self.__dict__[prop])
+                except Exception as e:
+                    success = False
+                    failures.append(str(e))
+        if not success:
+            raise ApplyValueFailedException(', '.join(failures))
+
+    def disableTrackpoint(self):
+        """
+        Disable the trackpoint
+        :return: Nothing
+        """
+        success: bool = True
+        failures: list = list()
+        for prop in self.__dict__.keys():
+            file_path: str = str(BASE_PATH / prop)
+            if os.path.isfile(file_path):
+                try:
+                    with open(file_path, 'w') as file:
+                        file.write('0')
                 except Exception as e:
                     success = False
                     failures.append(str(e))
@@ -179,7 +200,10 @@ class TrackPointHandler(object):
                 exit(1)
             print(self.inner.__dict__[prop])
             return
-
+        if verb == 'disable':
+            self.inner.disableTrackpoint()
+            print(self.inner.get_status_str())
+            return
         # No match found
         print('Command "%s" not found' % verb, file=sys.stderr)
         exit(1)
