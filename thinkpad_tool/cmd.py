@@ -9,10 +9,6 @@ import logging
 import pathlib
 import argparse
 
-from .battery import BatteryHandler
-from .trackpoint import TrackPointHandler
-from .undervolt import UndervoltHandler
-
 # Setup logger
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -58,11 +54,14 @@ def commandline_parser(unparsed_args: None or list = None):
         'property', type=str, help='Property going to take action')
     prop = str(parser.parse_args(unparsed_args[0:1]).property).lower()
     if prop == 'trackpoint':
+        from .trackpoint import TrackPointHandler
         handler = TrackPointHandler()
         handler.run(unparsed_args[1:])
     if prop == 'battery':
+        from .battery import BatteryHandler
         handler = BatteryHandler()
         handler.run(unparsed_args[1:])
     if prop == 'undervolt':
+        from .undervolt import UndervoltHandler
         handler = UndervoltHandler()
         handler.run(unparsed_args[1:])

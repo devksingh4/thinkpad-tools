@@ -10,8 +10,7 @@ import re
 import sys
 import pathlib
 import argparse
-
-from .utils import ApplyValueFailedException
+from .utils import ApplyValueFailedException, NotSudo
 
 BASE_DIR = pathlib.PurePath('/sys/class/power_supply/')
 
@@ -291,12 +290,13 @@ class BatteryHandler(object):
             return
 
         if verb.startswith('set-'):
+            if os.getuid() != 0:
+                raise NotSudo("Script must be run as superuser/sudo")
             try:
                 prop: str = verb.split('-', maxsplit=1)[1].replace('-', '_')
             except IndexError:
                 print('Invalid command', file=sys.stderr)
                 exit(1)
-                return  # Stupid IntelliJ IDEA
             for name in names:
                 if (prop not in EDITABLE_PROPERTIES) or\
                         (prop not in self.inner[name].__dict__.keys()):
@@ -312,7 +312,6 @@ class BatteryHandler(object):
                 except ApplyValueFailedException as e:
                     print(str(e), file=sys.stderr)
                     exit(1)
-                    continue  # Emmmm
                 print(value)
             return
 
@@ -322,7 +321,6 @@ class BatteryHandler(object):
             except IndexError:
                 print('Invalid command', file=sys.stderr)
                 exit(1)
-                return  # 🌝🌝🌝
             result: list = list()
             for name in names:
                 if prop not in self.inner[name].__dict__.keys():
