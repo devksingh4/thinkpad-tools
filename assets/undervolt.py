@@ -77,7 +77,7 @@ class Undervolt(object):
         """
         success = True
         failures: list = list()
-        system = thinkpad_tool.classes.UndervoltSystem()
+        system = assets.classes.UndervoltSystem()
         for prop in self.__dict__.keys():
             plane: int = 0
             if prop == "core":
@@ -104,7 +104,7 @@ class Undervolt(object):
         Set values to the system MSR using undervolt function
         :return: Nothing
         """
-        system = thinkpad_tool.classes.UndervoltSystem()
+        system = assets.classes.UndervoltSystem()
         success: bool = True
         failures: list = list()
         for prop in self.__dict__.keys():

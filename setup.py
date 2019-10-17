@@ -12,7 +12,7 @@ setup(
     name='thinkpad-tools',
     maintainer="Dev Singh",
     maintainer_email="devksingh4@gmail.com",
-    version='0.9.2',
+    version='0.9.2-hotfix1',
     description='Tools for ThinkPads',
     platforms=['Linux'],
     keywords='thinkpad trackpoint battery undervolt',
