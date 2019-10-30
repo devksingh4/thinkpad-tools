@@ -15,6 +15,8 @@ if os.getuid() != 0:
 
 if os.path.exists("/sys/devices/rmi4-00/rmi4-00.fn03/serio2"):
     BASE_PATH = pathlib.PurePath('/sys/devices/rmi4-00/rmi4-00.fn03/serio2')
+elif os.path.exists("/sys/devices/rmi4-00/rmi4-00.fn03/serio3"):
+    BASE_PATH = pathlib.PurePath('/sys/devices/rmi4-00/rmi4-00.fn03/serio3')
 else:
     BASE_PATH = pathlib.PurePath('/sys/devices/platform/i8042/serio1/serio2')
 
