@@ -15,3 +15,7 @@ While most of these tools exist seperately, it would be nice to have a first-cla
 
 ## Installing Utility
 Run `python3 setup.py install` after cloning the repository (`git clone https://github.com/devksingh4/thinkpad-tools`). 
+
+
+## Contribution Copyright Assignment
+By contributing to this codebase, you hereby assign copyright in this code to the project, to be licensed under the same terms as the rest of the code.
