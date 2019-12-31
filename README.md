@@ -19,3 +19,6 @@ Run `python3 setup.py install` after cloning the repository (`git clone https://
 
 ## Contribution Copyright Assignment
 By contributing to this codebase, you hereby assign copyright in this code to the project, to be licensed under the same terms as the rest of the code.
+
+## Persistence of Settings
+Edit file `/etc/thinkpad-tools-persistence.sh` to set settings. Setting will take effect next reboot, or you can run `systemctl daemon-reload && systemctl restart thinkpad-tools.service` to have them take effect immediately. 
