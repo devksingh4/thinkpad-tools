@@ -6,7 +6,8 @@ Setup tools wrapper
 """
 
 from setuptools import find_packages, setup
-
+import os
+import sys
 
 setup(
     name='thinkpad-tools',
@@ -20,3 +21,7 @@ setup(
     license='GPLv3',
     scripts=['thinkpad-tools']
 )
+
+print("Will now install the systemd unit service for persistence.")
+print("To set persistent settings, please edit the file '/etc/thinkpad-tools-persistence.sh'")
+os.system('sudo python3 persistence.py')
