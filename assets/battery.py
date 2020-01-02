@@ -1,5 +1,3 @@
-# battery.py
-
 """
 Battery related stuff
 """
