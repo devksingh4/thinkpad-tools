@@ -24,4 +24,4 @@ By contributing to this codebase, you hereby assign copyright in this code to th
 Edit file `/etc/thinkpad-tools-persistence.sh` to set settings. Setting will take effect next reboot, or you can run `systemctl daemon-reload && systemctl restart thinkpad-tools.service` to have them take effect immediately. 
 
 ## Donating
-A few people have reached out to me about donating so I can continue to keep improving on the project. If you would like to donate,  I'm `@Dev-Singh-11` on Venmo and [paypal.me/androstudios](paypal.me/androstudios) on Paypal
+A few people have reached out to me about donating so I can continue to keep improving on the project. If you would like to donate,  I'm `@Dev-Singh-11` on Venmo and [https://paypal.me/androstudios](paypal.me/androstudios) on Paypal
