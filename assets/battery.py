@@ -101,7 +101,7 @@ class Battery(object):
         self.path: pathlib.PurePath = BASE_DIR / self.name
         for prop, default_value in PROPERTIES.items():
             if prop in kwargs.keys():
-                if type(kwargs[prop] == type(default_value):
+                if type(kwargs[prop]) == type(default_value):
                     self.__dict__[prop] = kwargs[prop]
             self.__dict__[prop] = default_value
         self.battery_health: int = 100
