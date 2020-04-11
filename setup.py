@@ -8,6 +8,7 @@ Setup tools wrapper
 from setuptools import find_packages, setup
 import os
 import sys
+from shutil import copyfile
 
 setup(
     name='thinkpad-tools',
@@ -25,4 +26,12 @@ setup(
 print("Will now install the systemd unit service for persistence.")
 print("""To set persistent settings, please edit the file
       '/etc/thinkpad-tools-persistence.sh'""")
-os.system('sudo python3 persistence.py')
+copyfile("thinkpad-tools.service", "/lib/systemd/system/thinkpad-tools.service")
+try:
+    f = open("/etc/thinkpad-tools-persistence.sh")
+except FileNotFoundError:
+    copyfile("thinkpad-tools-persistence.sh", "/etc/thinkpad-tools-persistence.sh")
+finally:
+    f.close()
+os.system('systemctl daemon-reload')
+os.system('systemctl enable thinkpad-tools.service')
