@@ -26,12 +26,10 @@ setup(
 print("Will now install the systemd unit service for persistence.")
 print("""To set persistent settings, please edit the file
       '/etc/thinkpad-tools-persistence.sh'""")
-copyfile("thinkpad-tools.service", "/lib/systemd/system/thinkpad-tools.service")
+copyfile("assets/thinkpad-tools.service", "/lib/systemd/system/thinkpad-tools.service")
 try:
     f = open("/etc/thinkpad-tools-persistence.sh")
 except FileNotFoundError:
-    copyfile("thinkpad-tools-persistence.sh", "/etc/thinkpad-tools-persistence.sh")
-finally:
-    f.close()
+    copyfile("assets/thinkpad-tools-persistence.sh", "/etc/thinkpad-tools-persistence.sh")
 os.system('systemctl daemon-reload')
 os.system('systemctl enable thinkpad-tools.service')
