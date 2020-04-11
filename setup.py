@@ -14,22 +14,24 @@ setup(
     name='thinkpad-tools',
     maintainer="Dev Singh",
     maintainer_email="dev@singhk.dev",
-    version='0.10.0',
+    version='0.10.1',
+    zip_safe=False,
     description='Tools for ThinkPads',
+    long_description="Tools created to manage thinkpad properties such as TrackPoint, Undervolt, and Battery",
     platforms=['Linux'],
+    include_package_data=True,
     keywords='thinkpad trackpoint battery undervolt',
     packages=find_packages(),
+    project_urls={
+        "Bug Tracker": "https://github.com/devksingh4/thinkpad-tools/issues",
+        "Documentation": "https://github.com/devksingh4/thinkpad-tools/blob/master/README.md",
+        "Source Code": "https://github.com/devksingh4/thinkpad-tools/",
+    },
     license='GPLv3',
-    scripts=['thinkpad-tools']
-)
+    scripts=['thinkpad-tools'],
+    data_files=[
+        ('/etc/', ["assets/thinkpad-tools-persistence.sh"]),
+        ('/lib/systemd/system/', ["assets/thinkpad-tools.service"])
 
-print("Will now install the systemd unit service for persistence.")
-print("""To set persistent settings, please edit the file
-      '/etc/thinkpad-tools-persistence.sh'""")
-copyfile("assets/thinkpad-tools.service", "/lib/systemd/system/thinkpad-tools.service")
-try:
-    f = open("/etc/thinkpad-tools-persistence.sh")
-except FileNotFoundError:
-    copyfile("assets/thinkpad-tools-persistence.sh", "/etc/thinkpad-tools-persistence.sh")
-os.system('systemctl daemon-reload')
-os.system('systemctl enable thinkpad-tools.service')
+    ],
+)
