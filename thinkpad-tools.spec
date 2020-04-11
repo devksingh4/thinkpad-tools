@@ -1,35 +1,47 @@
-%define name thinkpad-tools
-%define version 0.10.1
-%define unmangled_version 0.10.1
-%define unmangled_version 0.10.1
-%define release 1
+# Created by pyp2rpm-3.3.2
+%global pypi_name thinkpad-tools
 
-Summary: Tools for ThinkPads
-Name: %{name}
-Version: %{version}
-Release: %{release}
-Source0: %{name}-%{unmangled_version}.tar.gz
-License: GPLv3
-Group: Development/Libraries
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-Prefix: %{_prefix}
-BuildArch: noarch
-Vendor: Dev Singh <dev@singhk.dev>
+Name:           python-%{pypi_name}
+Version:        0.10.1
+Release:        1%{?dist}
+Summary:        Tools for ThinkPads
+
+License:        GPLv3
+URL:            None
+Source0:        https://files.pythonhosted.org/packages/source/t/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+BuildArch:      noarch
+ 
+BuildRequires:  python3-devel
+BuildRequires:  python3dist(setuptools)
 
 %description
-Tools created to manage thinkpad properties such as TrackPoint, Undervolt, and Battery
+Tools created to manage thinkpad properties such as TrackPoint, Undervolt, and
+Battery
+
+%package -n     %{pypi_name}
+Summary:        %{summary}
+%{?python_provide:%python_provide python3-%{pypi_name}}
+
+%description -n %{pypi_name}
+Tools created to manage thinkpad properties such as TrackPoint, Undervolt, and
+Battery
+
 
 %prep
-%setup -n %{name}-%{unmangled_version} -n %{name}-%{unmangled_version}
+%autosetup -n %{pypi_name}-%{version}
+# Remove bundled egg-info
+rm -rf %{pypi_name}.egg-info
 
 %build
-/usr/bin/python3 setup.py build
+%py3_build
 
 %install
-/usr/bin/python3 setup.py install --single-version-externally-managed -O1 --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
+%py3_install
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
-%files -f INSTALLED_FILES
-%defattr(-,root,root)
+%files -n python3-%{pypi_name}
+%doc README.md
+%{_bindir}/thinkpad-tools
+%{python3_sitelib}/assets
+%{python3_sitelib}/thinkpad_tools-%{version}-py?.?.egg-info
+/etc/thinkpad-tools-persistence.sh
+/lib/systemd/system/thinkpad-tools.service
