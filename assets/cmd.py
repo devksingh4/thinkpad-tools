@@ -23,6 +23,7 @@ Supported properties are:
     trackpoint      Things related to TrackPoints
     battery         Things related to batteries
     undervolt       Things related to undervolting
+    persistence     Things related to editing persistence
 '''
 
 USAGE_EXAMPLES = '''\
@@ -34,6 +35,7 @@ thinkpad-tools battery list
 thinkpad-tools battery status all
 thinkpad-tools undervolt set-core -20
 thinkpad-tools undervolt status
+thinkpad-tools persistence edit
 '''
 
 
@@ -64,4 +66,8 @@ def commandline_parser(unparsed_args: None or list = None):
     if prop == 'undervolt':
         from .undervolt import UndervoltHandler
         handler = UndervoltHandler()
+        handler.run(unparsed_args[1:])
+    if prop == 'persistence':
+        from .persistence import PersistenceHandler
+        handler = PersistenceHandler()
         handler.run(unparsed_args[1:])
