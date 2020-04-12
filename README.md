@@ -25,3 +25,5 @@ Run `thinkpad-tools persistence enable` to enable persistence and see the instru
 
 ## Donating
 A few people have reached out to me about donating so I can continue to keep improving on the project. If you would like to donate,  I'm `@Dev-Singh-11` on Venmo and [paypal.me/androstudios](https://paypal.me/androstudios) on Paypal
+
+[![Copr build status](https://copr.fedorainfracloud.org/coprs/dsingh/thinkpad-tools/package/python-thinkpad-tools/status_image/last_build.png)](https://copr.fedorainfracloud.org/a/dsingh/thinkpad-tools/package/python-thinkpad-tools/)
