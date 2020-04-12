@@ -8,7 +8,7 @@ Summary:        Tools for ThinkPads
 
 License:        GPLv3
 URL:            None
-Source0:        https://files.pythonhosted.org/packages/source/t/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+Source0:        https://files.pythonhosted.org/packages/source/t/%{pypi_name}/%{pypi_name}-%{version}.linux-x86_64.tar.gz
 BuildArch:      noarch
  
 BuildRequires:  python3-devel
