@@ -2,7 +2,7 @@
 %global pypi_name thinkpad-tools
 
 Name:           python-%{pypi_name}
-Version:        0.11.2
+Version:        0.12.0
 Release:        1%{?dist}
 Summary:        Tools for ThinkPads
 
@@ -10,7 +10,7 @@ License:        GPLv3
 URL:            None
 Source0:        https://files.pythonhosted.org/packages/source/t/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 BuildArch:      noarch
- 
+
 BuildRequires:  python3-devel
 BuildRequires:  python3dist(setuptools)
 
@@ -44,4 +44,4 @@ rm -rf %{pypi_name}.egg-info
 %{python3_sitelib}/assets
 %{python3_sitelib}/thinkpad_tools-%{version}-py?.?.egg-info
 /etc/thinkpad-tools-persistence.sh
-/lib/systemd/system/thinkpad-tools.service
+/lib/systemd/system/thinkpad-tools.service 
