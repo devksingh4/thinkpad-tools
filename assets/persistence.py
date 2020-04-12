@@ -19,13 +19,17 @@ USAGE_HEAD: str = '''\
 thinkpad-tools persistence <verb>
 
 Supported verbs are:
-    edit  Edit the persistent settings
+    edit    Edit the persistent settings
+    enable  Enable persistent settings
+    disable Disable persistent settings
 '''
 
 USAGE_EXAMPLES: str = '''\
 Examples:
 
 thinkpad-tools persistence edit
+thinkpad-tools persistence disable
+thinkpad-tools persistence enable
 '''
 
 
