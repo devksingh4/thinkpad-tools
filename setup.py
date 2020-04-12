@@ -14,7 +14,7 @@ setup(
     name='thinkpad-tools',
     maintainer="Dev Singh",
     maintainer_email="dev@singhk.dev",
-    version='0.11.1',
+    version='0.11.2',
     zip_safe=False,
     description='Tools for ThinkPads',
     long_description="Tools created to manage thinkpad properties such as TrackPoint, Undervolt, and Battery",
