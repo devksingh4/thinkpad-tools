@@ -48,9 +48,9 @@ rm -rf %{pypi_name}.egg-info
 /usr/lib/systemd/system/thinkpad-tools.service
 
 %changelog
-* Saturday April 11 2020 Dev Singh <dev@singhk.dev> 0.11.0
-- Initial RPM Release
-* Sunday April 12 2020 Dev Singh <dev@singhk.dev> 0.12.0
-- Patch documentation strings for persistence mode to show correct options
-* Monday April 12 2020 Dev Singh <dev@singhk.dev> 0.12.1
+* Mon April 13 2020 Dev Singh <dev@singhk.dev> 0.12.1
 - Comply with Fedora packaging guidelines
+* Sun April 12 2020 Dev Singh <dev@singhk.dev> 0.12.0
+- Patch documentation strings for persistence mode to show correct options
+* Sat April 11 2020 Dev Singh <dev@singhk.dev> 0.11.0
+- Initial RPM Release
