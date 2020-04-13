@@ -8,8 +8,8 @@ import os
 import sys
 import pathlib
 import argparse
-import assets.classes
-from assets.utils import NotSudo
+import thinkpad_tools_assets.classes
+from thinkpad_tools_assets.utils import NotSudo
 
 
 if os.getuid() != 0:

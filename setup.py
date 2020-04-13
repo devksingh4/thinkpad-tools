@@ -14,7 +14,7 @@ setup(
     name='thinkpad-tools',
     maintainer="Dev Singh",
     maintainer_email="dev@singhk.dev",
-    version='0.12.0build-fedora',
+    version='0.12.1',
     zip_safe=False,
     description='Tools for ThinkPads',
     long_description="Tools created to manage thinkpad properties such as TrackPoint, Undervolt, and Battery",
@@ -30,8 +30,9 @@ setup(
     license='GPLv3',
     scripts=['thinkpad-tools'],
     data_files=[
-        ('/etc/', ["assets/thinkpad-tools-persistence.sh"]),
-        ('/lib/systemd/system/', ["assets/thinkpad-tools.service"])
+        ('/etc/', ["thinkpad_tools_assets/thinkpad-tools-persistence.sh"]),
+        ('/usr/lib/systemd/system/', ["thinkpad_tools_assets/thinkpad-tools.service"]),
+        ('/usr/share/licenses/python-thinkpad-tools/', ["LICENSE"])
 
     ],
 )

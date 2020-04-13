@@ -1,4 +1,4 @@
-# utils.py
+# thinkpad_tools_assets.utils.py
 
 
 class ApplyValueFailedException(Exception):

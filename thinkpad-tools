@@ -6,7 +6,7 @@ ThinkPad-tools commandline wrapper
 """
 import os
 import sys
-from assets.cmd import commandline_parser
+from thinkpad_tools_assets.cmd import commandline_parser
 
 if __name__ == '__main__':
     commandline_parser(sys.argv[1:])

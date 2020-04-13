@@ -8,7 +8,7 @@ import re
 import sys
 import pathlib
 import argparse
-from .utils import ApplyValueFailedException, NotSudo
+from thinkpad_tools_assets.utils import ApplyValueFailedException, NotSudo
 
 BASE_DIR = pathlib.PurePath('/sys/class/power_supply/')
 

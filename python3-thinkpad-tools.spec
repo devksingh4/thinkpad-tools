@@ -1,22 +1,22 @@
-# Created by pyp2rpm-3.3.2
 %global pypi_name thinkpad-tools
 
 Name:           python-%{pypi_name}
-Version:        0.12.0
+Version:        0.12.1
 Release:        1%{?dist}
 Summary:        Tools for ThinkPads
 
 License:        GPLv3
-URL:            None
-Source0:        https://files.pythonhosted.org/packages/source/t/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+URL:            https://github.com/devksingh4/thinkpad-tools
+Source0:        %{pypi_source}
 BuildArch:      noarch
 
 BuildRequires:  python3-devel
 BuildRequires:  python3dist(setuptools)
+BuildRequires: systemd-rpm-macros
 
 %description
 Tools created to manage thinkpad properties such as TrackPoint, Undervolt, and
-Battery
+Battery.
 
 %package -n     %{pypi_name}
 Summary:        %{summary}
@@ -40,8 +40,17 @@ rm -rf %{pypi_name}.egg-info
 
 %files
 %doc README.md
+%license LICENSE
 %{_bindir}/thinkpad-tools
-%{python3_sitelib}/assets
+%{python3_sitelib}/thinkpad_tools_assets
 %{python3_sitelib}/thinkpad_tools-%{version}-py?.?.egg-info
-/etc/thinkpad-tools-persistence.sh
-/lib/systemd/system/thinkpad-tools.service 
+%config(noreplace) /etc/thinkpad-tools-persistence.sh
+/usr/lib/systemd/system/thinkpad-tools.service
+
+%changelog
+* Sat April 11 2020 Dev Singh <dev@singhk.dev> 0.11.0
+- Initial RPM Release
+* Sunday April 12 2020 Dev Singh <dev@singhk.dev> 0.12.0
+- Patch documentation strings for persistence mode to show correct options
+* Monday April 12 2020 Dev Singh <dev@singhk.dev> 0.12.1
+- Comply with Fedora packaging guidelines
