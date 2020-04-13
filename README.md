@@ -21,6 +21,14 @@ A COPR repository has been created for Fedora/CentOS at `https://copr.fedorainfr
 ### Other distros
 Run `python3 setup.py install` after cloning the repository (`git clone https://github.com/devksingh4/thinkpad-tools`). 
 
+## Supported Devices
+While this tool should work for any Core-i (xx10 series and onwards) ThinkPad, the following devices have been tested to work with this tool: 
+* T480
+* X1 Carbon Gen 7
+* T470
+Undervolting is only supported on Skylake or newer Intel CPUs. 
+
+If you have tested this tool to work on more machines, please open a pull request and add it to this list!
 
 ## Contribution Copyright Assignment
 By contributing to this codebase, you hereby assign copyright in this code to the project, to be licensed under the same terms as the rest of the code.
