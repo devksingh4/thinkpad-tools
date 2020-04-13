@@ -26,6 +26,7 @@ While this tool should work for any Core-i (xx10 series and onwards) ThinkPad, t
 * T480
 * X1 Carbon Gen 7
 * T470
+
 Undervolting is only supported on Skylake or newer Intel CPUs. 
 
 If you have tested this tool to work on more machines, please open a pull request and add it to this list!
