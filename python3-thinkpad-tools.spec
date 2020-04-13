@@ -48,7 +48,7 @@ rm -rf %{pypi_name}.egg-info
 /usr/lib/systemd/system/thinkpad-tools.service
 
 %changelog
-* Sat April 11 2020 Dev Singh <dev@singhk.dev> 0.11.0
+* Saturday April 11 2020 Dev Singh <dev@singhk.dev> 0.11.0
 - Initial RPM Release
 * Sunday April 12 2020 Dev Singh <dev@singhk.dev> 0.12.0
 - Patch documentation strings for persistence mode to show correct options
