@@ -12,7 +12,7 @@ BuildArch:      noarch
 
 BuildRequires:  python3-devel
 BuildRequires:  python3dist(setuptools)
-BuildRequires: systemd-rpm-macros
+BuildRequires:  systemd-rpm-macros
 
 %description
 Tools created to manage thinkpad properties such as TrackPoint, Undervolt, and
