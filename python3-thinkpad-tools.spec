@@ -49,7 +49,7 @@ rm -rf %{pypi_name}.egg-info
 %{_bindir}/thinkpad-tools
 %{python3_sitelib}/thinkpad_tools_assets
 %{python3_sitelib}/thinkpad_tools-%{version}-py?.?.egg-info
-%config(noreplace) /etc/thinkpad-tools-persistence.sh
+%config(noreplace) /etc/thinkpad-tools.ini
 /usr/lib/systemd/system/thinkpad-tools.service
 
 %changelog
