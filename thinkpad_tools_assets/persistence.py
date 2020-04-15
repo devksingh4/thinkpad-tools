@@ -1,4 +1,4 @@
-# undervolt.py
+# persistence.py
 
 """
 Wrapper to edit the persistent settings
@@ -8,7 +8,9 @@ import os
 import sys
 import pathlib
 import argparse
+import configparser
 import thinkpad_tools_assets.classes
+from thinkpad_tools_assets.cmd import commandline_parser
 from thinkpad_tools_assets.utils import NotSudo
 
 
@@ -22,6 +24,7 @@ Supported verbs are:
     edit    Edit the persistent settings
     enable  Enable persistent settings
     disable Disable persistent settings
+    apply   Apply the persistent settings
 '''
 
 USAGE_EXAMPLES: str = '''\
@@ -30,6 +33,7 @@ Examples:
 thinkpad-tools persistence edit
 thinkpad-tools persistence disable
 thinkpad-tools persistence enable
+thinkpad-tools persistence apply
 '''
 
 
@@ -78,7 +82,7 @@ class PersistenceHandler(object):
                 editor: str = os.environ['EDITOR']
             except KeyError:
                 editor: str = "/usr/bin/nano"
-            os.system('sudo {editor} /etc/thinkpad-tools-persistence.sh'
+            os.system('sudo {editor} /etc/thinkpad-tools.ini'
                       .format(editor=editor))
             return
         if verb == "enable":
@@ -92,6 +96,13 @@ class PersistenceHandler(object):
             os.system('systemctl daemon-reload')
             os.system('systemctl disable thinkpad-tools.service')
             print("Persistence disabled")
+            return
+       if verb == "apply":
+            config: configparser.ConfigParser = configparser.ConfigParser()
+            config.read('/etc/thinkpad-tools.ini')
+            for section in config.sections():
+                for command in section:
+                    commandline_parser([section, "set-"+command, config[section][command])
             return
 
         # No match found
