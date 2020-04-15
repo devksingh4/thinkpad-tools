@@ -89,7 +89,7 @@ class PersistenceHandler(object):
             os.system('systemctl daemon-reload')
             os.system('systemctl enable thinkpad-tools.service')
             print("""To set persistent settings, please edit the file
-                     '/etc/thinkpad-tools-persistence.sh'""")
+                     '/etc/thinkpad-tools.ini'""")
             print("Persistence enabled")
             return
         if verb == "disable":
