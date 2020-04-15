@@ -30,7 +30,7 @@ setup(
     license='GPLv3',
     scripts=['thinkpad-tools'],
     data_files=[
-        ('/etc/', ["thinkpad_tools_assets/thinkpad-tools-persistence.sh"]),
+        ('/etc/', ["thinkpad_tools_assets/thinkpad-tools.ini"]),
         ('/usr/lib/systemd/system/', ["thinkpad_tools_assets/thinkpad-tools.service"]),
         ('/usr/share/licenses/python-thinkpad-tools/', ["LICENSE"])
 
