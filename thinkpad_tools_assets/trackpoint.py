@@ -4,7 +4,7 @@
 Trackpoint related stuff
 """
 
-from .thinkpad_tools_assets.utils import ApplyValueFailedException, NotSudo
+from thinkpad_tools_assets.utils import ApplyValueFailedException, NotSudo
 import os
 import sys
 import pathlib

@@ -1,7 +1,7 @@
 %global pypi_name thinkpad-tools
 
 Name:           python-%{pypi_name}
-Version:        0.12.1
+Version:        0.12.2
 Release:        1%{?dist}
 Summary:        Tools for ThinkPads
 
@@ -53,6 +53,8 @@ rm -rf %{pypi_name}.egg-info
 /usr/lib/systemd/system/thinkpad-tools.service
 
 %changelog
+* Mon Apr 20 2020 Dev Singh <dev@singhk.dev> 0.12.2
+- Fix error with the TrackPoint script
 * Mon Apr 13 2020 Dev Singh <dev@singhk.dev> 0.12.1
 - Comply with Fedora packaging guidelines
 * Sun Apr 12 2020 Dev Singh <dev@singhk.dev> 0.12.0
