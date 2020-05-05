@@ -12,8 +12,12 @@ import thinkpad_tools_assets.classes
 from thinkpad_tools_assets.utils import ApplyValueFailedException, NotSudo
 
 
-if os.getuid() != 0:
-    raise NotSudo("Script must be run as superuser/sudo")
+try:
+    if os.getuid() != 0:
+        raise NotSudo("Script must be run as superuser/sudo")
+except NotSudo:
+    print("ERROR: This script must be run as superuser/sudo")
+    sys.exit(1)
 
 # PLANE KEY:
 # Plane 0: Core

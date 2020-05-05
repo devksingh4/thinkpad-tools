@@ -10,8 +10,12 @@ import sys
 import pathlib
 import argparse
 
-if os.getuid() != 0:
-    raise NotSudo("Script must be run as superuser/sudo")
+try:
+    if os.getuid() != 0:
+        raise NotSudo("Script must be run as superuser/sudo")
+except NotSudo:
+    print("ERROR: This script must be run as superuser/sudo")
+    sys.exit(1)
 
 if os.path.exists("/sys/devices/rmi4-00/rmi4-00.fn03/serio2"):
     BASE_PATH = pathlib.PurePath('/sys/devices/rmi4-00/rmi4-00.fn03/serio2')

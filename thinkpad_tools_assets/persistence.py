@@ -13,9 +13,12 @@ import thinkpad_tools_assets.classes
 from thinkpad_tools_assets.cmd import commandline_parser
 from thinkpad_tools_assets.utils import NotSudo
 
-
-if os.getuid() != 0:
-    raise NotSudo("Script must be run as superuser/sudo")
+try:
+    if os.getuid() != 0:
+        raise NotSudo("Script must be run as superuser/sudo")
+except NotSudo:
+    print("ERROR: This script must be run as superuser/sudo")
+    sys.exit(1)
 
 USAGE_HEAD: str = '''\
 thinkpad-tools persistence <verb>
@@ -97,12 +100,12 @@ class PersistenceHandler(object):
             os.system('systemctl disable thinkpad-tools.service')
             print("Persistence disabled")
             return
-       if verb == "apply":
+        if verb == "apply":
             config: configparser.ConfigParser = configparser.ConfigParser()
             config.read('/etc/thinkpad-tools.ini')
             for section in config.sections():
-                for command in section:
-                    commandline_parser([section, "set-"+command, config[section][command])
+                for (command, val) in config.items(section):
+                    commandline_parser([section, "set-"+command, val])
             return
 
         # No match found
