@@ -3,10 +3,10 @@ Description=Thinkpad Tools Persistence Service
 After=multi-user.target
 
 [Service]
-Type=simple
+Type=oneshot
 User=root
 Group=root
-ExecStart=/bin/bash '/etc/thinkpad-tools-persistence.sh'
+ExecStart=thinkpad-tools persistence apply
 
 [Install]
 WantedBy=multi-user.target

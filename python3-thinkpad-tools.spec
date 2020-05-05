@@ -1,7 +1,7 @@
 %global pypi_name thinkpad-tools
 
 Name:           python-%{pypi_name}
-Version:        0.12.2
+Version:        0.13
 Release:        1%{?dist}
 Summary:        Tools for ThinkPads
 
@@ -49,10 +49,12 @@ rm -rf %{pypi_name}.egg-info
 %{_bindir}/thinkpad-tools
 %{python3_sitelib}/thinkpad_tools_assets
 %{python3_sitelib}/thinkpad_tools-%{version}-py?.?.egg-info
-%config(noreplace) /etc/thinkpad-tools-persistence.sh
+%config(noreplace) /etc/thinkpad-tools.ini
 /usr/lib/systemd/system/thinkpad-tools.service
 
 %changelog
+* Tue May 05 2020 Dev Singh <dev@singhk.dev> 0.13
+- Implement true persistence with /etc/thinkpad-tools.ini
 * Mon Apr 20 2020 Dev Singh <dev@singhk.dev> 0.12.2
 - Fix error with the TrackPoint script
 * Mon Apr 13 2020 Dev Singh <dev@singhk.dev> 0.12.1

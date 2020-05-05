@@ -14,7 +14,7 @@ setup(
     name='thinkpad-tools',
     maintainer="Dev Singh",
     maintainer_email="dev@singhk.dev",
-    version='0.12.2',
+    version='0.13',
     zip_safe=False,
     description='Tools for ThinkPads',
     long_description="Tools created to manage thinkpad properties such as TrackPoint, Undervolt, and Battery",
@@ -30,7 +30,7 @@ setup(
     license='GPLv3',
     scripts=['thinkpad-tools'],
     data_files=[
-        ('/etc/', ["thinkpad_tools_assets/thinkpad-tools-persistence.sh"]),
+        ('/etc/', ["thinkpad_tools_assets/thinkpad-tools.ini"]),
         ('/usr/lib/systemd/system/', ["thinkpad_tools_assets/thinkpad-tools.service"]),
         ('/usr/share/licenses/python-thinkpad-tools/', ["LICENSE"])
 
