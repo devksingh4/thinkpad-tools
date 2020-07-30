@@ -1,3 +1,8 @@
+## Update 07/30/2020
+
+My primary machine is now not a ThinkPad anymore, but rather a desktop computer. As a result, this tool may not recieve many updates other than to fix bugs brought up by others. 
+
+---
 # Thinkpad Tools
 Tools created to manage thinkpad properties
 
