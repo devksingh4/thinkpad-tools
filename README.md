@@ -1,3 +1,7 @@
+## Update 02/10/2021
+
+There also exists a somewhat-functioning GUI for this utility, which relies on this utility being installed. You may find it [here](https://github.com/devksingh4/thinkpad-tools-gui). Beware questionable design choices, I am *definitely* not a frontend person!
+
 ## Update 07/30/2020
 
 My primary machine is now not a ThinkPad anymore, but rather a desktop computer. I still have my ThinkPad and use it frequently, but not much development is occuring on it. As a result, this tool may not recieve many updates other than to fix bugs brought up by others, or ones I notice during my use. 
