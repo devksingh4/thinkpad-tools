@@ -13,7 +13,7 @@ from shutil import copyfile
 setup(
     name='thinkpad-tools',
     maintainer="Dev Singh",
-    maintainer_email="dev@singhk.dev",
+    maintainer_email="dev@devksingh.com",
     version='0.13',
     zip_safe=False,
     description='Tools for ThinkPads',
