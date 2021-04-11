@@ -53,6 +53,8 @@ rm -rf %{pypi_name}.egg-info
 /usr/lib/systemd/system/thinkpad-tools.service
 
 %changelog
+* Sun April 11 2021 Dev Singh <dev@devksingh.com> 0.14
+- Add ability to read undervolt status
 * Tue May 05 2020 Dev Singh <dev@singhk.dev> 0.13
 - Implement true persistence with /etc/thinkpad-tools.ini
 * Mon Apr 20 2020 Dev Singh <dev@singhk.dev> 0.12.2

@@ -83,25 +83,17 @@ class Undervolt(object):
         failures: list = list()
         system = thinkpad_tools_assets.classes.UndervoltSystem()
         for prop in self.__dict__.keys():
-            plane: int = 0
-            if prop == "core":
-                pass
-            if prop == "gpu":
-                plane = 1
-            if prop == "cache":
-                plane = 2
-            if prop == "uncore":
-                plane = 3
-            if prop == "analogio":
-                plane = 4
+            plane_hashmap = {"core": 0, "gpu": 1, "cache": 2, "uncore": 3, "analogio": 4}
+            h: str = ''
             try:
-                h: str = system.readUndervolt(plane)
+                plane = plane_hashmap[prop]
+                h = system.readUndervolt(plane)
             except Exception as e:
                 success = False
                 failures.append(str(e))
+            self.__dict__[prop] = h
         if not success:
             raise ApplyValueFailedException(', '.join(failures))
-        self.__dict__[prop] = h
 
     def set_values(self):
         """
@@ -111,21 +103,12 @@ class Undervolt(object):
         system = thinkpad_tools_assets.classes.UndervoltSystem()
         success: bool = True
         failures: list = list()
+        plane_hashmap = {"core": 0, "gpu": 1, "cache": 2, "uncore": 3, "analogio": 4}
         for prop in self.__dict__.keys():
             if self.__dict__[prop] is None:
                 continue
-            plane: int = 0
-            if prop == "core":
-                pass
-            if prop == "gpu":
-                plane = 1
-            if prop == "cache":
-                plane = 2
-            if prop == "uncore":
-                plane = 3
-            if prop == "analogio":
-                plane = 4
             try:
+                plane: int = plane_hashmap[prop]
                 system.applyUndervolt(int(self.__dict__[prop]), plane)
             except Exception as e:
                 success = False
@@ -139,11 +122,11 @@ class Undervolt(object):
         :return: str: status string
         """
         return STATUS_TEXT.format(
-            core=self.core or 'Unknown',
-            gpu=self.gpu or 'Unknown',
-            cache=self.cache or 'Unknown',
-            uncore=self.uncore or 'Unknown',
-            analogio=self.analogio or 'Unknown'
+            core=self.core,
+            gpu=self.gpu,
+            cache=self.cache,
+            uncore=self.uncore,
+            analogio=self.analogio
         )
 
 
@@ -206,7 +189,6 @@ class UndervoltHandler(object):
             if prop not in self.inner.__dict__.keys():
                 invalid_property(prop, 1)
             self.inner.__dict__[prop] = str(''.join(args.arguments))
-            print(self.inner.__dict__[prop])
             self.inner.set_values()
             print(self.inner.get_status_str())
             return
@@ -216,7 +198,6 @@ class UndervoltHandler(object):
                 prop: str = verb.split('-', maxsplit=1)[1]
             except IndexError:
                 invalid_property(verb, 1)
-                return
             if not hasattr(self.inner, prop):
                 invalid_property(prop, 1)
             if not self.inner.__dict__[prop]:

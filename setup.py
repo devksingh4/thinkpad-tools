@@ -6,15 +6,13 @@ Setup tools wrapper
 """
 
 from setuptools import find_packages, setup
-import os
-import sys
 from shutil import copyfile
 
 setup(
     name='thinkpad-tools',
     maintainer="Dev Singh",
     maintainer_email="dev@devksingh.com",
-    version='0.13',
+    version='0.14',
     zip_safe=False,
     description='Tools for ThinkPads',
     long_description="Tools created to manage thinkpad properties such as TrackPoint, Undervolt, and Battery",
