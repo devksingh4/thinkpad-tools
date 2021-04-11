@@ -13,7 +13,7 @@ class UndervoltSystem(object):
     def applyUndervolt(self, mv, plane):
         """
         Apply undervolt to system MSR for Intel-based systems
-        :return: int error: error code to pas
+        :return: int error: error code to pass
         """
         error = 0
         uv_value = format(
