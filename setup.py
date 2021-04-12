@@ -7,12 +7,13 @@ Setup tools wrapper
 
 from setuptools import find_packages, setup
 from shutil import copyfile
+import meta
 
 setup(
-    name='thinkpad-tools',
-    maintainer="Dev Singh",
-    maintainer_email="dev@devksingh.com",
-    version='0.14',
+    name=meta.PACKAGE_NAME,
+    maintainer=meta.MAINTAINER_NAME,
+    maintainer_email=meta.MAINTAINER_EMAIL,
+    version=meta.VERSION,
     zip_safe=False,
     description='Tools for ThinkPads',
     long_description="Tools created to manage thinkpad properties such as TrackPoint, Undervolt, and Battery",
