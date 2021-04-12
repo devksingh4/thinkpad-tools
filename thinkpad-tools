@@ -4,11 +4,9 @@
 """
 ThinkPad-tools commandline wrapper
 """
+import os
 import sys
 from thinkpad_tools_assets.cmd import commandline_parser
-import meta
 
 if __name__ == '__main__':
-    if len(sys.argv) == 1:
-        print(f"{meta.PACKAGE_NAME} v{meta.VERSION}")
     commandline_parser(sys.argv[1:])
