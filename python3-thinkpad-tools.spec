@@ -1,7 +1,7 @@
 %global pypi_name thinkpad-tools
 
 Name:           python-%{pypi_name}
-Version:        0.13
+Version:        0.14
 Release:        1%{?dist}
 Summary:        Tools for ThinkPads
 
